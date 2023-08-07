@@ -21,9 +21,9 @@ title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Soyi Park"
 description              : "Logging my work and recent learning."
-url                      : "https://gepp.github.io"
-baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : "gepp.github.io/main"
+url                      : "https://insanecrab.github.io"
+baseurl                  : "gepp" # the subpath of your site, e.g. "/blog"
+repository               : "INSANECRAB/insanecrab.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
@@ -81,7 +81,7 @@ baidu_site_verification  :
 
 # Social Sharing
 twitter:
-  username               : "@gepp_techac"
+  username               : "gepp_techac"
 facebook:
   username               :
   app_id                 :
@@ -113,13 +113,13 @@ author:
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:your.name@email.com"
-    - label: "Website"
+      url: "mailto:sypark90@gmail.com"
+    - label: "My Major blog in KR"
       icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
+      url: "https://gepp.tistory.com"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      # url: "https://twitter.com/"
+      url: "https://twitter.com/gepp_techac"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
