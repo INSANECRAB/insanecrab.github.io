@@ -133,8 +133,6 @@ footer:
 # Reading Files
 include:
   - .htaccess
-  - _pages
-  - /docs
   - _posts
 exclude:
   - "*.sublime-project"
