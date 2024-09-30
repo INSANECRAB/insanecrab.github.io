@@ -61,7 +61,8 @@ algolia:
   search_only_api_key    : 9d5014e5bbc77372547bce778dfa5663 # YOUR_SEARCH_ONLY_API_KEY
   powered_by             : true # true (default), false
   files_to_exclude:
-    - /docs/_posts/
+    - test/
+    - docs/_posts/
     - _posts/2024-09-30-welcome-to-jekyll.markdown
 
 # SEO Related
@@ -160,6 +161,7 @@ exclude:
   - README
   - tmp
   - docs/_posts
+  - test/
 keep_files:
   - .git
   - .svn
