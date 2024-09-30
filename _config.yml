@@ -7,11 +7,11 @@
 
 remote_theme             : "mmistakes/minimal-mistakes@4.24.0"
 
-minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "neon" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Personal-Space-For-Archiving"
+title                    : "Personal Space For IT Archiving"
 title_separator          : "-"
 subtitle                 : "A Jekyll theme"
 name                     : &name "Soyi Park" # &name is a YAML anchor which can be *referenced later
@@ -98,7 +98,7 @@ analytics:
 # Site Author
 author:
   name             : *name # *name is a YAML reference pointing to the &anchor earlier
-  avatar           : "/assets/images/michael-rose.jpg"
+  avatar           : "/assets/devops_logo.jpg"
   bio              : "Just another blog regarding *devops*, *ISTP*, *traveler*, *and so on*."
   location         : "Seoul, KR"
   links:
