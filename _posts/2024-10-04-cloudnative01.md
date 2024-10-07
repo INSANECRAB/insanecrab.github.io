@@ -12,56 +12,11 @@ What's the key point of both cloud native and traditional architecture?
 
 * session status
 
-below is not related to this subject, just sample texts.
+The difference is how to deal with the session status, such as application and setting data.
+The traditional application has state.
+Most commonly the application state is stored in the compute instance.
+So the load balancer has used sticky session to route customer request to the same server.
+The load balancer could forward traffic of specific user to the same instance by using sticky session and the user information,
+could be searched as session variable in the external datastore.
 
-### Ordered -- Unordered -- Ordered
-
-1. ordered item
-2. ordered item 
-  * **unordered**
-  * **unordered** 
-    1. ordered item
-    2. ordered item
-3. ordered item
-4. ordered item
-
-### Ordered -- Unordered -- Unordered
-
-1. ordered item
-2. ordered item 
-  * **unordered**
-  * **unordered** 
-    * unordered item
-    * unordered item
-3. ordered item
-4. ordered item
-
-### Unordered -- Ordered -- Unordered
-
-* unordered item
-* unordered item 
-  1. ordered
-  2. ordered 
-    * unordered item
-    * unordered item
-* unordered item
-* unordered item
-
-### Unordered -- Unordered -- Ordered
-
-* unordered item
-* unordered item 
-  * unordered
-  * unordered 
-    1. **ordered item**
-    2. **ordered item**
-* unordered item
-* unordered item
-
-### Task Lists
-
-- [x] Finish my changes
-- [ ] Push my commits to GitHub
-- [ ] Open a pull request
-  - [ ] Follow discussions
-  - [x] Push new commits
+In this method there's a possibility to miss the state so incorrect status can happen.
