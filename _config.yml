@@ -136,6 +136,7 @@ footer:
 include:
   - .htaccess
   - _posts
+  - _pets
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
