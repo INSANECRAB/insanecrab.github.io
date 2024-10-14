@@ -20,8 +20,8 @@ In this method, there's a risk of losing the state, leading to potential inconsi
 
 On the other hand, **Cloud Native Applications** (CNA) are generally stateless. CNAs may process data, but they ensure no data loss experience for users while dynamically managing the number of compute instances. The state in CNAs is stored externally, not inside the VM. 
 
-<mark>The system can dynamically add or remove instances without affecting user experience, as the state is maintained separately in external storage in the CNA.</mark>
+<u>The system can dynamically add or remove instances without affecting user experience, as the state is maintained separately in external storage in the CNA.</u>
 
 
 In other words traditional architectures typically store session state inside the VM, while only using external storage for lookup purposes, such as user data or session variables. 
-In contrast, cloud-native architectures externalize the session state entirely, making it more resilient to VM failures.
+In contrast, <mark>cloud-native architectures externalize the session state entirely, making it more resilient to VM failures.</mark>
