@@ -1,5 +1,5 @@
 ---
-title: "Cloud Native : difference between cloud native and monolithic traditional architecture (modifying)"
+title: "Cloud Native: Difference Between Cloud Native and Monolithic Traditional Architecture (modifying)"
 categories:
   - cloudnative
 tags:
@@ -8,15 +8,15 @@ tags:
   - note
 ---
 
-What's the key point of both cloud native and traditional architecture?
+What's the key point of both cloud-native and traditional architectures?
 
-* session status
+* Session status
 
-The difference is how to deal with the session status, such as application and setting data.
-The traditional application has state.
-Most commonly the application state is stored in the compute instance.
-So the load balancer has used sticky session to route customer request to the same server.
-The load balancer could forward traffic of specific user to the same instance by using sticky session and the user information,
-could be searched as session variable in the external datastore.
+The difference lies in how to manage session state, such as application and configuration data.
+Traditional applications are stateful, meaning that application states are often stored on the compute instance itself. To handle this, load balancers use sticky sessions to route customer requests to the same server consistently. By using sticky sessions, the load balancer can forward a user's traffic to the same instance, allowing session data to be retrieved from external storage.
 
-In this method there's a possibility to miss the state so incorrect status can happen.
+In this method, there's a risk of losing the state, leading to potential inconsistencies. For example, if a specific VM experiences an outage, the load balancer detects this and creates a new session for the user on a different VM. However, the original state, stored on the failed VM, will not be available in the newly created instance.
+
+On the other hand, **Cloud Native Applications** (CNA) are generally stateless. CNAs may process data, but they ensure no data loss experience for users while dynamically managing the number of compute instances. The state in CNAs is stored externally, not inside the VM. 
+
+<mark>The system can dynamically add or remove instances without affecting user experience, as the state is maintained separately in external storage in the CNA.</mark>
