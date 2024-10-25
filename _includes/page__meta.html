@@ -16,32 +16,38 @@
       {% assign words_per_minute = document.words_per_minute | default: site.words_per_minute | default: 200 %}
       {% assign words = document.content | strip_html | number_of_words %}
       {% assign minutes = words | divided_by: words_per_minute %}
-      {% assign hours = minutes | divided_by: 60 %}
-      {% assign days = hours | divided_by: 24 %}
-      {% assign months = days | divided_by: 30 %}
+      
+      {% assign current_time = 'now' | date: "%s" %}
+      {% assign post_time = document.date | date: "%s" %}
+      {% assign elapsed_seconds = current_time | minus: post_time %}
+      
+      {% assign elapsed_minutes = elapsed_seconds | divided_by: 60 %}
+      {% assign elapsed_hours = elapsed_seconds | divided_by: 3600 %}
+      {% assign elapsed_days = elapsed_seconds | divided_by: 86400 %}
+      {% assign elapsed_months = elapsed_days | divided_by: 30 %}
 
       <span class="page__meta-readtime">
         <i class="far {% if include.type == 'grid' and document.read_time and document.show_date %}fa-fw {% endif %}fa-clock" aria-hidden="true"></i>
-        {% if minutes < 1 %}
-          {{ site.data.ui-text[site.locale].less_than | default: "less than" }} 1 {{ site.data.ui-text[site.locale].minute_read | default: "minute read" }}
-        {% elsif minutes == 1 %}
-          1 {{ site.data.ui-text[site.locale].minute_read | default: "minute read" }}
-        {% elsif minutes < 60 %}
-          {{ minutes | ceil }} {{ site.data.ui-text[site.locale].minutes_read | default: "minutes read" }}
-        {% elsif hours == 1 %}
-          1 {{ site.data.ui-text[site.locale].hour_read | default: "hour read" }}
-        {% elsif hours < 24 %}
-          {{ hours | ceil }} {{ site.data.ui-text[site.locale].hours_read | default: "hours read" }}
-        {% elsif days == 1 %}
-          1 {{ site.data.ui-text[site.locale].day_read | default: "day read" }}
-        {% elsif days < 30 %}
-          {{ days | ceil }} {{ site.data.ui-text[site.locale].days_read | default: "days read" }}
-        {% elsif months == 1 %}
-          1 {{ site.data.ui-text[site.locale].month_read | default: "month read" }}
-        {% elsif months < 6 %}
-          {{ months | ceil }} {{ site.data.ui-text[site.locale].months_read | default: "months read" }}
+        {% if elapsed_minutes < 1 %}
+          <span>posted</span> 1 {{ site.data.ui-text[site.locale].minute_ago | default: "minute ago" }}
+        {% elsif elapsed_minutes == 1 %}
+          <span>posted</span> 1 {{ site.data.ui-text[site.locale].minute_ago | default: "minute ago" }}
+        {% elsif elapsed_minutes < 60 %}
+          <span>posted</span> {{ elapsed_minutes | ceil }} {{ site.data.ui-text[site.locale].minutes_ago | default: "minutes ago" }}
+        {% elsif elapsed_hours == 1 %}
+          <span>posted</span> 1 {{ site.data.ui-text[site.locale].hour_ago | default: "hour ago" }}
+        {% elsif elapsed_hours < 24 %}
+          <span>posted</span> {{ elapsed_hours | ceil }} {{ site.data.ui-text[site.locale].hours_ago | default: "hours ago" }}
+        {% elsif elapsed_days == 1 %}
+          <span>posted</span> 1 {{ site.data.ui-text[site.locale].day_ago | default: "day ago" }}
+        {% elsif elapsed_days < 30 %}
+          <span>posted</span> {{ elapsed_days | ceil }} {{ site.data.ui-text[site.locale].days_ago | default: "days ago" }}
+        {% elsif elapsed_months == 1 %}
+          <span>posted</span> 1 {{ site.data.ui-text[site.locale].month_ago | default: "month ago" }}
+        {% elsif elapsed_months < 6 %}
+          <span>posted</span> {{ elapsed_months | ceil }} {{ site.data.ui-text[site.locale].months_ago | default: "months ago" }}
         {% else %}
-          6 months or more
+          <span>posted</span> 6 months or more ago
         {% endif %}
       </span>
     {% endif %}
