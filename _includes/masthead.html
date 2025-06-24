@@ -30,6 +30,36 @@
         </button>
         <ul class="hidden-links hidden"></ul>
       </nav>
+      <div style="display:inline-block; float:right; margin-left:16px;">
+        <button id="login-btn" style="margin-right:8px;">Login</button>
+        <button id="post-btn" style="display:none;">Post</button>
+      </div>
+      <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          if (window.netlifyIdentity) {
+            netlifyIdentity.init();
+            function updateAuthUI() {
+              var user = netlifyIdentity.currentUser();
+              var loginBtn = document.getElementById('login-btn');
+              var postBtn = document.getElementById('post-btn');
+              if (user) {
+                loginBtn.textContent = 'Logout';
+                loginBtn.onclick = function() { netlifyIdentity.logout(); };
+                postBtn.style.display = 'inline-block';
+                postBtn.onclick = function() { window.location.href = '/admin'; };
+              } else {
+                loginBtn.textContent = 'Login';
+                loginBtn.onclick = function() { netlifyIdentity.open(); };
+                postBtn.style.display = 'none';
+              }
+            }
+            netlifyIdentity.on('init', updateAuthUI);
+            netlifyIdentity.on('login', updateAuthUI);
+            netlifyIdentity.on('logout', updateAuthUI);
+          }
+        });
+      </script>
     </div>
   </div>
 </div>

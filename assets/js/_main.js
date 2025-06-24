@@ -133,4 +133,35 @@ $(function() {
       $(this).append(anchor);
     }
   });
+
+  // Dynamic 'posted X ago' time
+  function timeAgo(dateString) {
+    const now = new Date();
+    const postDate = new Date(dateString);
+    const seconds = Math.floor((now - postDate) / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(seconds / 3600);
+    const days = Math.floor(seconds / 86400);
+    const months = Math.floor(days / 30);
+
+    if (minutes < 1) return 'posted 1 minute ago';
+    if (minutes === 1) return 'posted 1 minute ago';
+    if (minutes < 60) return `posted ${minutes} minutes ago`;
+    if (hours === 1) return 'posted 1 hour ago';
+    if (hours < 24) return `posted ${hours} hours ago`;
+    if (days === 1) return 'posted 1 day ago';
+    if (days < 30) return `posted ${days} days ago`;
+    if (months === 1) return 'posted 1 month ago';
+    if (months < 6) return `posted ${months} months ago`;
+    return 'posted 6 months or more ago';
+  }
+
+  $(function() {
+    $('.js-timeago').each(function() {
+      var dateString = $(this).data('post-date');
+      if (dateString) {
+        $(this).text(timeAgo(dateString));
+      }
+    });
+  });
 });
