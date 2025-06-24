@@ -1,7 +1,5 @@
 backend:
-  name: github
-  repo: insanecrab/insanecrab.github.io
-  branch: main
+  name: git-gateway
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 collections:
