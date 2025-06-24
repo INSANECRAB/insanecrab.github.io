@@ -17,6 +17,9 @@
               <a href="{{ link.url | relative_url }}"{% if link.description %} title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
             </li>
           {%- endfor -%}
+          <!-- Login/Post buttons -->
+          <li class="masthead__menu-item" id="login-btn-li"><a href="#">Login</a></li>
+          <li class="masthead__menu-item" id="post-btn-li" style="display: none;"><a href="https://insanecrab.netlify.app/admin/">Post</a></li>
         </ul>
         {% if site.search == true %}
         <button class="search__toggle" type="button">
@@ -24,11 +27,6 @@
           <i class="fas fa-search"></i>
         </button>
         {% endif %}
-
-        <!-- Login/Post Buttons -->
-        <button id="login-btn" class="greedy-nav__toggle" style="margin-left: 8px;">Login</button>
-        <button id="post-btn" class="greedy-nav__toggle" style="display:none; margin-left: 8px;">Post</button>
-        
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>
           <div class="navicon"></div>
@@ -44,21 +42,23 @@
   document.addEventListener("DOMContentLoaded", function() {
     if (window.netlifyIdentity) {
       netlifyIdentity.init();
+
       function updateAuthUI() {
         var user = netlifyIdentity.currentUser();
-        var loginBtn = document.getElementById('login-btn');
-        var postBtn = document.getElementById('post-btn');
+        var loginLi = document.getElementById('login-btn-li');
+        var postLi = document.getElementById('post-btn-li');
+
         if (user) {
-          loginBtn.textContent = 'Logout';
-          loginBtn.onclick = function() { netlifyIdentity.logout(); };
-          postBtn.style.display = 'inline-block';
-          postBtn.onclick = function() { window.location.href = 'https://insanecrab.netlify.app/admin/'; };
+          loginLi.innerHTML = '<a href="#">Logout</a>';
+          loginLi.onclick = function(e) { e.preventDefault(); netlifyIdentity.logout(); };
+          postLi.style.display = 'list-item';
         } else {
-          loginBtn.textContent = 'Login';
-          loginBtn.onclick = function() { netlifyIdentity.open(); };
-          postBtn.style.display = 'none';
+          loginLi.innerHTML = '<a href="#">Login</a>';
+          loginLi.onclick = function(e) { e.preventDefault(); netlifyIdentity.open(); };
+          postLi.style.display = 'none';
         }
       }
+
       netlifyIdentity.on('init', updateAuthUI);
       netlifyIdentity.on('login', updateAuthUI);
       netlifyIdentity.on('logout', updateAuthUI);
