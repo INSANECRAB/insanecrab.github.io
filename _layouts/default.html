@@ -27,5 +27,34 @@
     </div>
 
     {% include scripts.html %}
+
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        if (window.netlifyIdentity) {
+          netlifyIdentity.init();
+
+          function updateAuthUI() {
+            var user = netlifyIdentity.currentUser();
+            var loginLi = document.getElementById('login-btn-li');
+            var postLi = document.getElementById('post-btn-li');
+
+            if (user) {
+              loginLi.innerHTML = '<a href="#">Logout</a>';
+              loginLi.onclick = function(e) { e.preventDefault(); netlifyIdentity.logout(); };
+              postLi.style.display = 'list-item';
+            } else {
+              loginLi.innerHTML = '<a href="#">Login</a>';
+              loginLi.onclick = function(e) { e.preventDefault(); netlifyIdentity.open(); };
+              postLi.style.display = 'none';
+            }
+          }
+
+          netlifyIdentity.on('init', updateAuthUI);
+          netlifyIdentity.on('login', updateAuthUI);
+          netlifyIdentity.on('logout', updateAuthUI);
+        }
+      });
+    </script>
   </body>
 </html>
