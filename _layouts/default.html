@@ -8,7 +8,7 @@
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
-      function setupNetlifyIdentity() {
+      document.addEventListener("DOMContentLoaded", function() {
         if (window.netlifyIdentity) {
           netlifyIdentity.init();
 
@@ -36,11 +36,8 @@
 
           // 최초에도 한 번 실행
           updateAuthUI();
-        } else {
-          setTimeout(setupNetlifyIdentity, 100);
         }
-      }
-      document.addEventListener("DOMContentLoaded", setupNetlifyIdentity);
+      });
     </script>
     {% include skip-links.html %}
     {% include masthead.html %}
