@@ -6,6 +6,42 @@
   </head>
 
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+      function setupNetlifyIdentity() {
+        if (window.netlifyIdentity) {
+          netlifyIdentity.init();
+
+          function updateAuthUI() {
+            var user = netlifyIdentity.currentUser();
+            var loginLink = document.getElementById('login-link');
+            var postLi = document.getElementById('post-btn-li');
+
+            if (loginLink && postLi) {
+              if (user) {
+                loginLink.textContent = 'Logout';
+                loginLink.onclick = function(e) { e.preventDefault(); netlifyIdentity.logout(); };
+                postLi.style.display = 'list-item';
+              } else {
+                loginLink.textContent = 'Login';
+                loginLink.onclick = function(e) { e.preventDefault(); window.location.href = '/admin/'; };
+                postLi.style.display = 'none';
+              }
+            }
+          }
+
+          netlifyIdentity.on('init', updateAuthUI);
+          netlifyIdentity.on('login', updateAuthUI);
+          netlifyIdentity.on('logout', updateAuthUI);
+
+          // 최초에도 한 번 실행
+          updateAuthUI();
+        } else {
+          setTimeout(setupNetlifyIdentity, 100);
+        }
+      }
+      document.addEventListener("DOMContentLoaded", setupNetlifyIdentity);
+    </script>
     {% include skip-links.html %}
     {% include masthead.html %}
 
@@ -27,34 +63,5 @@
     </div>
 
     {% include scripts.html %}
-
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        if (window.netlifyIdentity) {
-          netlifyIdentity.init();
-
-          function updateAuthUI() {
-            var user = netlifyIdentity.currentUser();
-            var loginLink = document.getElementById('login-link');
-            var postLi = document.getElementById('post-btn-li');
-
-            if (user) {
-              loginLink.textContent = 'Logout';
-              loginLink.onclick = function(e) { e.preventDefault(); netlifyIdentity.logout(); };
-              postLi.style.display = 'list-item';
-            } else {
-              loginLink.textContent = 'Login';
-              loginLink.onclick = function(e) { e.preventDefault(); netlifyIdentity.open(); };
-              postLi.style.display = 'none';
-            }
-          }
-
-          netlifyIdentity.on('init', updateAuthUI);
-          netlifyIdentity.on('login', updateAuthUI);
-          netlifyIdentity.on('logout', updateAuthUI);
-        }
-      });
-    </script>
   </body>
 </html>
